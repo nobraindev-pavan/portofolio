@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pavan · Portfolio</title>
+<meta name="description" content="Pavan (nobraindev-pavan): Python, AI/ML and computer vision. Projects, skills and contact.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect x='3' y='3' width='26' height='26' rx='3' fill='none' stroke='%2322c55e' stroke-width='3'/><circle cx='16' cy='16' r='4' fill='%2322c55e'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f8f6; --surface:#ffffff; --surface-2:#eef1ec; --text:#141a16; --muted:#5b665e;
+  --border:#dde3dc; --accent:#15803d; --accent-soft:#dcfce7; --box:#16a34a; --shadow:0 1px 2px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b0f0c; --surface:#121813; --surface-2:#18201a; --text:#e8eee9; --muted:#97a39a;
+    --border:#243026; --accent:#4ade80; --accent-soft:#14301d; --box:#22c55e; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b0f0c; --surface:#121813; --surface-2:#18201a; --text:#e8eee9; --muted:#97a39a;
+  --border:#243026; --accent:#4ade80; --accent-soft:#14301d; --box:#22c55e; --shadow:none;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:16px/1.6 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+.mono{font-family:"JetBrains Mono",ui-monospace,monospace}
+.wrap{max-width:1040px;margin:0 auto;padding:0 16px}
+@media (min-width:720px){.wrap{padding:0 32px}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:12px}
+.logo{font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px}
+.logo span{color:var(--accent)}
+.links{display:flex;gap:4px;align-items:center}
+.links a{text-decoration:none;color:var(--muted);font-size:14px;padding:6px 10px;border-radius:8px}
+.links a:hover{color:var(--text);background:var(--surface-2)}
+@media (max-width:600px){.links a.hide-sm{display:none}}
+#theme{background:none;border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:8px;cursor:pointer;display:grid;place-items:center}
+
+/* hero */
+.hero{padding-top:88px;padding-bottom:64px}
+.tag{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);border:1px solid var(--border);background:var(--surface);padding:4px 12px;border-radius:999px}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--box);box-shadow:0 0 0 4px var(--accent-soft)}
+h1{font-size:clamp(40px,8vw,76px);line-height:1.05;letter-spacing:-.035em;font-weight:800;margin:24px 0 20px}
+.bbox{position:relative;display:inline-block;padding:0 .12em;border:2px solid var(--box);border-radius:2px}
+.bbox::before{content:attr(data-label);position:absolute;left:-2px;bottom:100%;background:var(--box);color:#04130a;font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:0;padding:4px 6px;white-space:nowrap}
+.bbox i{position:absolute;width:8px;height:8px;background:var(--box)}
+.bbox i:nth-child(1){top:-5px;left:-5px}.bbox i:nth-child(2){top:-5px;right:-5px}
+.bbox i:nth-child(3){bottom:-5px;left:-5px}.bbox i:nth-child(4){bottom:-5px;right:-5px}
+.lede{font-size:clamp(17px,2.2vw,20px);color:var(--muted);max-width:620px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:32px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;padding:11px 18px;border-radius:10px;border:1px solid var(--border);background:var(--surface)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--text);color:var(--bg);border-color:var(--text)}
+.btn.primary:hover{opacity:.9}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:56px}
+@media (min-width:720px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+.stat b{display:block;font-size:30px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+
+/* sections */
+section{padding-top:56px;padding-bottom:56px}
+.eyebrow{font:500 13px "JetBrains Mono",monospace;color:var(--accent);margin-bottom:8px}
+h2{font-size:clamp(28px,4vw,38px);letter-spacing:-.025em;line-height:1.15;margin-bottom:28px}
+
+/* featured */
+.featured{display:grid;gap:0;background:var(--surface);border:1px solid var(--border);border-radius:20px;overflow:hidden;box-shadow:var(--shadow)}
+@media (min-width:860px){.featured{grid-template-columns:1.05fr 1fr}}
+.feat-body{padding:28px}
+@media (min-width:720px){.feat-body{padding:40px}}
+.badge{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);background:var(--accent-soft);padding:3px 10px;border-radius:999px;margin-bottom:14px}
+.featured h3{font-size:28px;letter-spacing:-.02em;margin-bottom:10px}
+.featured p{color:var(--muted)}
+.feat-list{list-style:none;margin:20px 0;display:grid;gap:8px}
+.feat-list li{display:flex;gap:10px;font-size:15px}
+.feat-list li::before{content:"✓";color:var(--accent);font-weight:700}
+.garden{background:linear-gradient(180deg,#fdf6ec,#f3e8d6);display:flex;align-items:flex-end;justify-content:center;gap:clamp(8px,3vw,26px);padding:40px 20px 0;min-height:280px;position:relative}
+:root[data-theme="dark"] .garden{background:linear-gradient(180deg,#1d1a14,#262017)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .garden{background:linear-gradient(180deg,#1d1a14,#262017)}}
+.garden::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:#8b6b4a}
+.plant{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center}
+.plant svg{display:block}
+.plant small{position:relative;z-index:2;margin-top:-26px;margin-bottom:8px;font:500 11px "JetBrains Mono",monospace;color:#fbf3e6}
+
+/* project grid */
+.grid{display:grid;gap:16px}
+@media (min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
+.card{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.card-top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.lang{font:500 12px "JetBrains Mono",monospace;color:var(--muted);display:flex;align-items:center;gap:6px}
+.lang::before{content:"";width:10px;height:10px;border-radius:50%;background:var(--c,#999)}
+.card h3{font-size:20px;letter-spacing:-.01em;margin-bottom:8px}
+.card p{color:var(--muted);font-size:15px;flex:1}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:16px 0}
+.chip{font:500 12px "JetBrains Mono",monospace;padding:3px 8px;border-radius:6px;background:var(--surface-2);color:var(--muted)}
+.card-links{display:flex;gap:16px;font-size:14px;font-weight:600}
+.card-links a{text-decoration:none;color:var(--accent)}
+.card-links a:hover{text-decoration:underline}
+
+/* skills */
+.skills{display:grid;gap:16px}
+@media (min-width:720px){.skills{grid-template-columns:repeat(3,1fr)}}
+.skill{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px}
+.skill h3{font-size:17px;margin:12px 0 6px}
+.skill p{font-size:14px;color:var(--muted);margin-bottom:14px}
+.ico{width:40px;height:40px;border-radius:10px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+
+/* leetcode */
+.lc{display:grid;gap:24px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:20px;padding:28px}
+@media (min-width:720px){.lc{grid-template-columns:auto 1fr;padding:36px}}
+.ring{width:150px;height:150px;position:relative;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring div{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring b{font-size:34px;line-height:1}
+.ring span{font-size:12px;color:var(--muted)}
+.lc p{color:var(--muted)}
+
+/* contact */
+.contact{text-align:center;padding-top:72px;padding-bottom:88px}
+.contact p{color:var(--muted);max-width:520px;margin:0 auto 28px}
+.contact .cta{justify-content:center}
+footer{border-top:1px solid var(--border);padding:24px 0;font-size:13px;color:var(--muted)}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <a class="logo" href="#top"><span class="mono">&gt;_</span> pavan</a>
+    <div class="links">
+      <a href="#work">Work</a>
+      <a href="#skills" class="hide-sm">Skills</a>
+      <a href="#contact">Contact</a>
+      <button id="theme" aria-label="Toggle colour theme" title="Toggle theme">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero wrap">
+    <span class="tag"><span class="dot"></span>Learning out loud · Python · AI/ML · Computer Vision</span>
+    <h1>Hi, I'm <span class="bbox" data-label="developer 0.99"><i></i><i></i><i></i><i></i>Pavan</span>.<br>I build things that learn.</h1>
+    <p class="lede">I'm a student developer exploring Python, machine learning and computer vision. I like shipping small, useful apps and then taking them apart to see how the models inside them work.</p>
+    <div class="cta">
+      <a class="btn primary" href="#work">See my work →</a>
+      <a class="btn" href="https://github.com/nobraindev-pavan" target="_blank" rel="noopener">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2c-3.2.7-3.88-1.37-3.88-1.37-.52-1.33-1.28-1.69-1.28-1.69-1.05-.72.08-.7.08-.7 1.16.08 1.77 1.19 1.77 1.19 1.03 1.77 2.7 1.26 3.36.96.1-.75.4-1.26.73-1.55-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.19-3.1-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.17 1.18a11 11 0 0 1 5.77 0c2.2-1.49 3.17-1.18 3.17-1.18.63 1.59.23 2.76.11 3.05.74.81 1.19 1.84 1.19 3.1 0 4.42-2.7 5.4-5.26 5.68.41.36.78 1.06.78 2.14v3.17c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .5z"/></svg>
+        GitHub
+      </a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b data-count="100">100</b><span>LeetCode problems solved</span></div>
+      <div class="stat"><b data-count="6">6</b><span>Public projects</span></div>
+      <div class="stat"><b data-count="2">2</b><span>Live web apps</span></div>
+      <div class="stat"><b>Py</b><span>Main language</span></div>
+    </div>
+  </header>
+
+  <!-- FEATURED -->
+  <section id="work" class="wrap reveal">
+    <div class="eyebrow">// featured project</div>
+    <h2>The productivity app</h2>
+    <article class="featured">
+      <div class="feat-body">
+        <span class="badge">Productivity · Live</span>
+        <h3>Habit Garden 🌱</h3>
+        <p>A habit tracker that turns your routines into a garden. Every day you keep a habit, you water its plant. Keep the streak going and it grows from a seed into a flower. Miss a day and it starts again.</p>
+        <ul class="feat-list">
+          <li>6 growth stages tied to your streak, from Seed to Blooming at 20+ days</li>
+          <li>Detects a new day on its own and resets missed streaks</li>
+          <li>A daily progress bar for how much of the garden you've watered</li>
+          <li>Saves to your browser, so there's no login or database</li>
+          <li>Hand-coded inline SVG plants, works on mobile</li>
+        </ul>
+        <div class="chips"><span class="chip">HTML5</span><span class="chip">CSS3</span><span class="chip">Vanilla JS</span><span class="chip">SVG</span><span class="chip">localStorage</span></div>
+        <div class="cta" style="margin-top:8px">
+          <a class="btn primary" href="https://plsfixurhabits.vercel.app" target="_blank" rel="noopener">Open the app ↗</a>
+          <a class="btn" href="https://github.com/nobraindev-pavan/plsfixurhabits" target="_blank" rel="noopener">Source code</a>
+        </div>
+      </div>
+      <div class="garden" aria-hidden="true">
+        <!-- seed -->
+        <div class="plant"><svg width="44" height="40" viewBox="0 0 44 40"><ellipse cx="22" cy="34" rx="7" ry="5" fill="#6b4f33"/></svg><small>day 0</small></div>
+        <!-- sprout -->
+        <div class="plant"><svg width="44" height="70" viewBox="0 0 44 70"><path d="M22 66V40" stroke="#4d7c3a" stroke-width="3" fill="none"/><path d="M22 44c-8 0-12-6-12-10 6 0 12 3 12 10z" fill="#7cb55a"/><path d="M22 42c8 0 12-6 12-10-6 0-12 3-12 10z" fill="#8fc96b"/></svg><small>day 2</small></div>
+        <!-- growing -->
+        <div class="plant"><svg width="56" height="120" viewBox="0 0 56 120"><path d="M28 116V30" stroke="#4d7c3a" stroke-width="3.5" fill="none"/><path d="M28 86c-12 0-18-8-18-14 9 0 18 4 18 14z" fill="#7cb55a"/><path d="M28 64c12 0 18-8 18-14-9 0-18 4-18 14z" fill="#8fc96b"/><path d="M28 44c-10 0-15-7-15-12 8 0 15 4 15 12z" fill="#7cb55a"/><circle cx="28" cy="28" r="6" fill="#a7d98a"/></svg><small>day 7</small></div>
+        <!-- blooming -->
+        <div class="plant"><svg width="80" height="170" viewBox="0 0 80 170"><path d="M40 166V48" stroke="#4d7c3a" stroke-width="4" fill="none"/><path d="M40 130c-15 0-22-10-22-17 11 0 22 5 22 17z" fill="#7cb55a"/><path d="M40 104c15 0 22-10 22-17-11 0-22 5-22 17z" fill="#8fc96b"/><path d="M40 78c-13 0-19-9-19-15 10 0 19 4 19 15z" fill="#7cb55a"/><g transform="translate(40 34)"><circle r="11" cy="-14" fill="#f9a8c9"/><circle r="11" cy="14" fill="#f9a8c9"/><circle r="11" cx="-14" fill="#f7b4d0"/><circle r="11" cx="14" fill="#f7b4d0"/><circle r="9" fill="#fcd34d"/></g></svg><small>day 20+</small></div>
+      </div>
+    </article>
+  </section>
+
+  <!-- PROJECTS -->
+  <section class="wrap reveal">
+    <div class="eyebrow">// more projects</div>
+    <h2>Other things I've built</h2>
+    <div class="grid">
+
+      <article class="card">
+        <div class="card-top"><span class="lang" style="--c:#3572A5">Python</span><span class="chip">ML Ops</span></div>
+        <h3>Champion vs Challenger with MLflow</h3>
+        <p>Pits two Hugging Face sentiment models against each other, DistilBERT and RoBERTa-large, on the same 100 Rotten Tomatoes reviews. Tracks accuracy and inference time in MLflow, then registers the winner as the "champion" model and uses it for new predictions.</p>
+        <div class="chips"><span class="chip">transformers</span><span class="chip">MLflow</span><span class="chip">PyTorch</span><span class="chip">scikit-learn</span></div>
+        <div class="card-links"><a href="https://github.com/nobraindev-pavan/1MS25CI091_mlflow_champion_challenger" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="lang" style="--c:#3572A5">Python</span><span class="chip">SIH 2026</span></div>
+        <h3>SANCHAY: Railway Block Planner</h3>
+        <p>Built for Smart India Hackathon problem SIH26027 (Ministry of Railways). It plans the daily maintenance blocks on railway sections, finding the fewest safe blocks that clear the most critical work while delaying trains the least. Uses a CP-SAT solver plus ML risk models, and explains every choice it makes.</p>
+        <div class="chips"><span class="chip">OR-Tools CP-SAT</span><span class="chip">ML</span><span class="chip">pytest</span><span class="chip">optimisation</span></div>
+        <div class="card-links"><a href="https://github.com/nobraindev-pavan/Sih-claude" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="lang" style="--c:#f1e05a">JavaScript</span><span class="chip">Security · AI</span></div>
+        <h3>RakshaNet</h3>
+        <p>An offline-first web app that protects people in India from cyber fraud. Paste a message or upload a screenshot to check it for scams with an on-device rule engine, OCR and AI analysis. It also has an emergency guide, a tamper-evident evidence vault and an AI-drafted police complaint.</p>
+        <div class="chips"><span class="chip">PWA</span><span class="chip">Tesseract.js OCR</span><span class="chip">Gemini / Claude</span><span class="chip">SHA-256</span></div>
+        <div class="card-links"><a href="https://rakshanet-theta.vercel.app" target="_blank" rel="noopener">Live ↗</a><a href="https://github.com/nobraindev-pavan/Rakshanet" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+      <article class="card">
+        <div class="card-top"><span class="lang" style="--c:#3572A5">Python</span><span class="chip">In progress</span></div>
+        <h3>ML From Scratch</h3>
+        <p>My learning log for machine learning. I'm building the core algorithms myself with NumPy, so I understand the maths before I reach for a library. Then I use them on real problems.</p>
+        <div class="chips"><span class="chip">NumPy</span><span class="chip">linear algebra</span><span class="chip">learning</span></div>
+        <div class="card-links"><a href="https://github.com/nobraindev-pavan/ml_from_scratch" target="_blank" rel="noopener">Code ↗</a></div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills" class="wrap reveal">
+    <div class="eyebrow">// what I'm into</div>
+    <h2>Skills &amp; focus</h2>
+    <div class="skills">
+      <div class="skill">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3h5a3 3 0 0 1 3 3v4H8a3 3 0 0 0-3 3v3a3 3 0 0 1-2-3V8a5 5 0 0 1 5-5z"/><path d="M16 21h-5a3 3 0 0 1-3-3v-4h8a3 3 0 0 0 3-3V8a3 3 0 0 1 2 3v5a5 5 0 0 1-5 5z"/></svg></div>
+        <h3>Python</h3>
+        <p>The language I use most, for scripting, data work, DSA practice and ML pipelines.</p>
+        <div class="chips"><span class="chip">NumPy</span><span class="chip">pandas</span><span class="chip">matplotlib</span><span class="chip">pytest</span></div>
+      </div>
+      <div class="skill">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5" cy="6" r="2"/><circle cx="5" cy="18" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="19" cy="18" r="2"/><path d="M7 6.5l3 4.5M7 17.5l3-4.5M14 11l3-4.5M14 13l3 4.5"/></svg></div>
+        <h3>AI / Machine Learning</h3>
+        <p>Training and comparing models, tracking experiments, and learning the maths behind them.</p>
+        <div class="chips"><span class="chip">scikit-learn</span><span class="chip">PyTorch</span><span class="chip">Hugging Face</span><span class="chip">MLflow</span></div>
+      </div>
+      <div class="skill">
+        <div class="ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7V4h3M18 4h3v3M21 17v3h-3M6 20H3v-3"/><rect x="8" y="8" width="8" height="8" rx="1"/></svg></div>
+        <h3>Computer Vision</h3>
+        <p>Exploring how machines see: image processing, OCR, and object detection.</p>
+        <div class="chips"><span class="chip">OpenCV</span><span class="chip">OCR</span><span class="chip">CNNs</span><span class="chip">detection</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LEETCODE -->
+  <section class="wrap reveal">
+    <div class="lc">
+      <div class="ring">
+        <svg width="150" height="150" viewBox="0 0 150 150">
+          <circle cx="75" cy="75" r="64" fill="none" stroke="var(--surface-2)" stroke-width="12"/>
+          <circle id="arc" cx="75" cy="75" r="64" fill="none" stroke="var(--box)" stroke-width="12" stroke-linecap="round" stroke-dasharray="402" stroke-dashoffset="402" style="transition:stroke-dashoffset 1.4s ease"/>
+        </svg>
+        <div><b>100</b><span>solved</span></div>
+      </div>
+      <div>
+        <div class="eyebrow">// problem solving</div>
+        <h2 style="margin-bottom:12px">100 problems on LeetCode</h2>
+        <p>I practise data structures and algorithms in Python regularly: arrays, hashing, two pointers, recursion and more. It helps me write cleaner code and break big problems into small steps. Next goal: 250.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="wrap contact reveal">
+    <div class="eyebrow">// say hi</div>
+    <h2>Let's build something</h2>
+    <p>I'm open to collaborating on projects, hackathons and internships, especially in AI/ML and computer vision. The quickest way to reach me is on GitHub.</p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/nobraindev-pavan" target="_blank" rel="noopener">github.com/nobraindev-pavan ↗</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="yr">2026</span> Pavan</span>
+    <span class="mono">built with html, css &amp; a little js</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var root=document.documentElement, KEY='theme';
+  try{var saved=localStorage.getItem(KEY); if(saved) root.setAttribute('data-theme',saved);}catch(e){}
+  document.getElementById('theme').addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+    var next=cur==='dark'?'light':'dark';
+    root.setAttribute('data-theme',next);
+    try{localStorage.setItem(KEY,next);}catch(e){}
+  });
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  var arc=document.getElementById('arc');
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      en.target.classList.add('in');
+      if(en.target.contains(arc)) arc.style.strokeDashoffset=402*(1-100/250); // progress toward the 250 goal
+      io.unobserve(en.target);
+    });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>
